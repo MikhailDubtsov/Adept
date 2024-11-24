@@ -1,14 +1,16 @@
-# Параметры
-disk_size_mb = 1.44  # объем дискеты в Мб
-pages_per_book = 100  # количество страниц в книге
-lines_per_page = 50   # количество строк на странице
-chars_per_line = 25   # количество символов в строке
-bytes_per_char = 4    # количество байт на символ
-
-disk_size_bytes = disk_size_mb * 1024 * 1024  # Мб в байты
-
-book_size_bytes = pages_per_book * lines_per_page * chars_per_line * bytes_per_char
-
-number_of_books = disk_size_bytes // book_size_bytes
-
-print(f"Количество книг, помещающихся на дискету:{number_of_books}")
+salary = 5000  # Ежемесячная зарплата
+spend = 6000  # Траты за первый месяц
+months = 10  # Количество месяцев, которое планируется протянуть без долгов
+increase = 0.03  # Ежемесячный рост цен
+def calculate_required_capital(salary, spend, months, increase):
+    total_capital = 0  # Общая необходимая подушка безопасности
+    for month in range(months):
+        # Рассчитываем нехватку средств
+        deficit = spend - salary
+        if deficit > 0:  # Если недостаток средств есть
+            total_capital += deficit  # Увеличиваем общую подушку безопасности
+        # Увеличиваем расходы на 3% для следующего месяца
+        spend *= (1 + increase)
+    return round(total_capital)  # Возвращаем округленное значение
+required_capital = calculate_required_capital(salary, spend, months, increase)
+print(f"Подушка безопасности, чтобы протянуть {months} месяцев без долгов:", required_capital)
